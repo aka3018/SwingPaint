@@ -9,6 +9,7 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
 
@@ -25,10 +26,10 @@ public class DrawArea extends JComponent {
  // Image in which we're going to draw
  private Image image;
  // Graphics2D object ==> used to draw on
- private Graphics2D g2;
+ public Graphics2D g2;
  // Mouse coordinates
  private int currentX, currentY, oldX, oldY;
-
+ BufferedImage bi;
  public DrawArea() {
    setDoubleBuffered(false);
    addMouseListener(new MouseAdapter() {
@@ -48,6 +49,7 @@ public class DrawArea extends JComponent {
        if (g2 != null) {
          // draw line if g2 context not null
          g2.drawLine(oldX, oldY, currentX, currentY);
+         
          // refresh draw area to repaint
          repaint();
          // store current coords x,y as olds x,y
@@ -61,21 +63,24 @@ public class DrawArea extends JComponent {
  protected void paintComponent(Graphics g) {
    if (image == null) {
      // image to draw null ==> we create
+	  
+	     
      image = createImage(getSize().width, getSize().height);
      g2 = (Graphics2D) image.getGraphics();
+    
      // enable antialiasing
      g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
      // clear draw area
+     
      clear();
    }
 
    g.drawImage(image, 0, 0, null);
  }
  
- public void bold(int bold) {
-		g2.setStroke(new BasicStroke(bold));
-	}
-
+public void bold(int bold) {
+	g2.setStroke(new BasicStroke(bold));
+}
  // now we create exposed methods
  public void clear() {
    g2.setPaint(Color.white);
@@ -84,7 +89,6 @@ public class DrawArea extends JComponent {
    g2.setPaint(Color.black);
    repaint();
  }
-
  public void chg_color(Color c) {
 	   g2.setPaint(c);
 	   // draw white on entire draw area to clear
@@ -92,7 +96,7 @@ public class DrawArea extends JComponent {
 	  // g2.setPaint(Color.black);
 	   repaint();
 	 }
- 
+
  public void red() {
    // apply red color on g2 context
    g2.setPaint(Color.red);
@@ -110,19 +114,28 @@ public class DrawArea extends JComponent {
    g2.setPaint(Color.green);
  }
 
+ public void blue() {
+   g2.setPaint(Color.blue);
+ }
  public void yellow() {
 	   g2.setPaint(Color.yellow);
 	 }
-public void cyan() {
+ public void cyan() {
 	   g2.setPaint(Color.cyan);
 	 }
-public void gray() {
+ public void gray() {
 	   g2.setPaint(Color.gray);
 	 }
-public void pink() {
+ public void pink() {
 	   g2.setPaint(Color.pink);
 	 }
-public void white() {
+ public void white() {
 	   g2.setPaint(Color.white);
 	 }
+ public void save() {
+	 
+	
+
+	 }
 }
+
