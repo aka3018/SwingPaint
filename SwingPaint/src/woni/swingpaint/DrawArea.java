@@ -11,6 +11,8 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JComponent;
 
+
+
 /**
 * Component for drawing !
 *
@@ -78,6 +80,14 @@ public class DrawArea extends JComponent {
    repaint();
  }
 
+ public void chg_color(Color c) {
+	   g2.setPaint(c);
+	   // draw white on entire draw area to clear
+	   g2.fillRect(0, 0, getSize().width, getSize().height);
+	  // g2.setPaint(Color.black);
+	   repaint();
+	 }
+ 
  public void red() {
    // apply red color on g2 context
    g2.setPaint(Color.red);

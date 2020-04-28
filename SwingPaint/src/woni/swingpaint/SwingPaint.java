@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -90,6 +91,43 @@ public class SwingPaint extends JFrame {
     
     ButtonGroup groupRd = new ButtonGroup();
     
+    
+    String[] colorList = { "white", "RED", "GREEN", "BLUE", "CYAN", "DARK GRAY", "MAGENTA", "ORANGE", "PINK" };
+	final JComboBox cbColor = new JComboBox(colorList);
+	cbColor.addActionListener(new ActionListener() {
+
+		public void actionPerformed(ActionEvent e) {
+			String ItemSelected = cbColor.getSelectedItem().toString();
+
+			if (ItemSelected.equals(colorList[0])) {
+				drawArea.chg_color(Color.white);
+			} else if (ItemSelected.equals(colorList[1])) {
+				drawArea.chg_color(Color.red);
+			} else if (ItemSelected.equals(colorList[2])) {
+				drawArea.chg_color(Color.GREEN);
+			} else if (ItemSelected.equals(colorList[3])) {
+				drawArea.chg_color(Color.BLUE);
+			} else if (ItemSelected.equals(colorList[4])) {
+				drawArea.chg_color(Color.CYAN);
+			} else if (ItemSelected.equals(colorList[5])) {
+				drawArea.chg_color(Color.darkGray);
+			} else if (ItemSelected.equals(colorList[6])) {
+				drawArea.chg_color(Color.MAGENTA);
+			} else if (ItemSelected.equals(colorList[7])) {
+				drawArea.chg_color(Color.orange);
+			} else if (ItemSelected.equals(colorList[8])) {
+				drawArea.chg_color(Color.PINK);
+			}
+
+			// logger.info(ItemSelected);
+
+		}
+	});
+	controls.add(cbColor);
+    
+    
+    
+    
     groupRd.add(blackBtn);
 	groupRd.add(greenBtn);
 	groupRd.add(redBtn);
@@ -115,7 +153,7 @@ public class SwingPaint extends JFrame {
     // add to content pane
     content.add(controls, BorderLayout.NORTH);
  
-    frame.setSize(600, 600);
+    frame.setSize(900, 700);
     // can close frame
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     // show the swing paint result
