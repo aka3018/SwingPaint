@@ -1,5 +1,6 @@
 package woni.swingpaint;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -70,6 +71,10 @@ public class DrawArea extends JComponent {
 
    g.drawImage(image, 0, 0, null);
  }
+ 
+ public void bold(int bold) {
+		g2.setStroke(new BasicStroke(bold));
+	}
 
  // now we create exposed methods
  public void clear() {

@@ -12,6 +12,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
  
 public class SwingPaint extends JFrame {
 	
@@ -19,6 +22,7 @@ public class SwingPaint extends JFrame {
   JRadioButton blackBtn, greenBtn, redBtn, magentaBtn, yelloBtn, pinkBtn, cyanBtn, grayBtn, whiteBtn;
   DrawArea drawArea;
   ActionListener actionListener = new ActionListener() {
+	  private JSlider slider;
  
   public void actionPerformed(ActionEvent e) {
       if (e.getSource() == clearBtn) {
@@ -44,6 +48,7 @@ public class SwingPaint extends JFrame {
   	}
     }
   };
+  private JPanel controls;
  
   public static void main(String[] args) {
     new SwingPaint().show();
@@ -90,7 +95,26 @@ public class SwingPaint extends JFrame {
     blackBtn.setSelected(true);
     
     ButtonGroup groupRd = new ButtonGroup();
-    
+
+	JSlider slider = new JSlider(0, 20, 1);
+	slider.setPaintLabels(true);
+	slider.setPaintTicks(true);
+
+	slider.setMajorTickSpacing(5);
+	slider.setMinorTickSpacing(1);
+
+
+	slider.addChangeListener(new ChangeListener() {
+
+		public void stateChanged(ChangeEvent e) {
+
+			drawArea.bold(slider.getValue());
+		
+		}
+
+	});
+	controls.add(slider);
+
     
     String[] colorList = { "white", "RED", "GREEN", "BLUE", "CYAN", "DARK GRAY", "MAGENTA", "ORANGE", "PINK" };
 	final JComboBox cbColor = new JComboBox(colorList);
@@ -124,9 +148,6 @@ public class SwingPaint extends JFrame {
 		}
 	});
 	controls.add(cbColor);
-    
-    
-    
     
     groupRd.add(blackBtn);
 	groupRd.add(greenBtn);
