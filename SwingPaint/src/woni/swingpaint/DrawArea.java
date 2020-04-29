@@ -132,6 +132,10 @@ public void bold(int bold) {
  public void white() {
 	   g2.setPaint(Color.white);
 	 }
-
+ public void save() {
+	 
+	
+	    
+	
+	 }
 }
-
